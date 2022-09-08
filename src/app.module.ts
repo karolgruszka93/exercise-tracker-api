@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExerciseGroups } from './exerciseGroups/exerciseGroups.entity';
 import { ExerciseGroupsModule } from './exerciseGroups/exerciseGroups.module';
+import { Users } from './users/users.entity';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { ExerciseGroupsModule } from './exerciseGroups/exerciseGroups.module';
       username: process.env.DB_USER,
       password: process.env.DB_USER_PASSWORD,
       database: process.env.DB_DATABASE_NAME,
-      entities: [ExerciseGroups],
+      entities: [ExerciseGroups, Users],
       synchronize: true,
     }),
     ExerciseGroupsModule,
