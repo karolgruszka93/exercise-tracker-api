@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExerciseGroups } from './exerciseGroups/exerciseGroups.entity';
 import { ExerciseGroupsModule } from './exerciseGroups/exerciseGroups.module';
 import { Users } from './users/users.entity';
+import { FacebookAuthModule } from './auth/facebook/facebookAuth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { Users } from './users/users.entity';
       synchronize: true,
     }),
     ExerciseGroupsModule,
+    FacebookAuthModule,
   ],
 })
 export class AppModule {}
