@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: api
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    command: npm run start:dev
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - mysql
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    restart: always
+    networks:
+      - webnet
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE_NAME}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+networks:
+  webnet:
