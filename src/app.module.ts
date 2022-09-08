@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ExerciseGroups } from './exerciseGroups/exerciseGroups.entity';
+import { ExerciseGroupsModule } from './exerciseGroups/exerciseGroups.module';
 
 @Module({
   imports: [
@@ -10,9 +12,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USER,
       password: process.env.DB_USER_PASSWORD,
       database: process.env.DB_DATABASE_NAME,
-      entities: [],
+      entities: [ExerciseGroups],
       synchronize: true,
     }),
+    ExerciseGroupsModule,
   ],
 })
 export class AppModule {}
