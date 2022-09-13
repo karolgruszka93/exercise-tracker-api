@@ -11,7 +11,7 @@ export class Users {
   @Column()
   lastName: string;
 
-  @Column('longtext')
+  @Column('text')
   picture: string;
 
   @Column({ default: null })
