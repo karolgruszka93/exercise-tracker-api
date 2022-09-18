@@ -35,7 +35,7 @@ export class FacebookAuthService {
         googleToken: null,
       });
     } catch (error) {
-      if (error.code === 'ERR_BAD_REQUEST') {
+      if (error.name === 'AxiosError') {
         throw new HttpException(
           {
             status: HttpStatus.SERVICE_UNAVAILABLE,
@@ -44,10 +44,7 @@ export class FacebookAuthService {
           HttpStatus.SERVICE_UNAVAILABLE,
         );
       }
-      if (
-        error.code === 'ER_BAD_NULL_ERROR' ||
-        error.code === 'ER_NO_DEFAULT_FOR_FIELD'
-      ) {
+      if (error.name === 'QueryFailedError') {
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
