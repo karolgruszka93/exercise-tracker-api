@@ -4,8 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import * as fs from 'fs';
 
 const httpsOptions = {
-  key: fs.readFileSync(__dirname + '/secrets/local-key.pem'),
-  cert: fs.readFileSync(__dirname + '/secrets/local-cert.pem'),
+  key: fs.readFileSync(__dirname + '/secrets/localhost-key.pem'),
+  cert: fs.readFileSync(__dirname + '/secrets/localhost.pem'),
 };
 
 async function bootstrap() {
