@@ -7,8 +7,12 @@ import { GetUserDto } from './dto/getUserDto';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get(':id')
-  async findUserById(@Param() params: GetUserDto): Promise<User> {
-    return this.usersService.findUserById(params.id);
+  @Get(':facebookProfileId')
+  async findUserByFacebookProfileId(
+    @Param() params: GetUserDto,
+  ): Promise<User> {
+    return this.usersService.findUserByFacebookProfileId(
+      params.facebookProfileId,
+    );
   }
 }

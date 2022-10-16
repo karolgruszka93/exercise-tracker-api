@@ -15,7 +15,7 @@ export class Users {
   picture: string;
 
   @Column({ default: null })
-  facebookToken: string | null;
+  facebookProfileId: string | null;
 
   @Column({ default: null })
   googleToken: string | null;

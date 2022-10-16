@@ -11,12 +11,8 @@ export class UsersService {
     private userRepository: Repository<Users>,
   ) {}
 
-  findUserById(id: string): Promise<Users> {
-    return this.userRepository.findOne({ where: { id } });
-  }
-
-  findUserByFacebookToken(facebookToken: string): Promise<Users> {
-    return this.userRepository.findOne({ where: { facebookToken } });
+  findUserByFacebookProfileId(facebookProfileId: string): Promise<Users> {
+    return this.userRepository.findOne({ where: { facebookProfileId } });
   }
 
   async createUser(user: User) {
