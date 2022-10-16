@@ -36,3 +36,8 @@ lerna-debug.log*
 
 #ENV
 .env
+
+#CERTS
+*.pem
+*.crt
+*.key
