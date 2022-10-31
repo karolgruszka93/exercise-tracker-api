@@ -14,9 +14,6 @@ export class Users {
   @Column('text')
   picture: string;
 
-  @Column({ default: null })
-  facebookProfileId: string | null;
-
-  @Column({ default: null })
-  googleToken: string | null;
+  @Column()
+  profileId: string;
 }

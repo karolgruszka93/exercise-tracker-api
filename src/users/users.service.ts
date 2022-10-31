@@ -11,8 +11,8 @@ export class UsersService {
     private userRepository: Repository<Users>,
   ) {}
 
-  findUserByFacebookProfileId(facebookProfileId: string): Promise<Users> {
-    return this.userRepository.findOne({ where: { facebookProfileId } });
+  findUserByProfileId(profileId: string): Promise<Users> {
+    return this.userRepository.findOne({ where: { profileId } });
   }
 
   async createUser(user: User) {

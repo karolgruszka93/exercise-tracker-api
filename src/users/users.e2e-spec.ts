@@ -32,7 +32,7 @@ describe('Users controller', () => {
 
   beforeEach(async () => {
     await usersRepository.query(
-      'INSERT INTO users VALUES ("1", "mockedFirstName", "mockedLastName", "pictureUrl", "mockedFbToken", "mockedGoogleToken")',
+      'INSERT INTO users VALUES ("1", "mockedFirstName", "mockedLastName", "pictureUrl", "mockedProfileId")',
     );
   });
 
@@ -44,21 +44,22 @@ describe('Users controller', () => {
     await app.close();
   });
 
-  it('should return 200 status after find user with specific id', async () => {
-    return request(app.getHttpServer()).get('/user/1').expect(200);
+  it('should return 200 status after find user with specific profile id', async () => {
+    return request(app.getHttpServer())
+      .get('/user/mockedFbProfileId')
+      .expect(200);
   });
 
-  it('should return exercise group with specific id', async () => {
+  it('should return user with specific profile id', async () => {
     return request(app.getHttpServer())
-      .get('/user/1')
+      .get('/user/mockedProfileId')
       .expect((response) => {
         expect(response.body).toStrictEqual({
           id: '1',
           firstName: 'mockedFirstName',
           lastName: 'mockedLastName',
           picture: 'pictureUrl',
-          facebookToken: 'mockedFbToken',
-          googleToken: 'mockedGoogleToken',
+          profileId: 'mockedProfileId',
         });
       });
   });

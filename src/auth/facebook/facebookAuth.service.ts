@@ -18,7 +18,7 @@ export class FacebookAuthService {
         this.httpService.get(facebookAPI + facebookToken),
       );
 
-      const user = await this.usersService.findUserByFacebookProfileId(
+      const user = await this.usersService.findUserByProfileId(
         fetchedFacebookUser?.data?.id,
       );
 
@@ -29,8 +29,7 @@ export class FacebookAuthService {
           firstName: fetchedFacebookUser?.data?.first_name,
           lastName: fetchedFacebookUser?.data?.last_name,
           picture: fetchedFacebookUser?.data?.picture?.data?.url,
-          facebookProfileId: fetchedFacebookUser?.data?.id,
-          googleToken: null,
+          profileId: fetchedFacebookUser?.data?.id,
         });
       }
     } catch (error) {
