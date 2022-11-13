@@ -9,10 +9,10 @@ export class FacebookAuthController {
 
   @Post()
   @HttpCode(200)
-  async findUserByFacebookToken(
+  async authUserByFacebook(
     @Body() facebookAuthDto: FacebookAuthDto,
   ): Promise<User> {
     const facebookToken = facebookAuthDto.facebookToken;
-    return this.facebookAuthService.checkUserByFacebookToken(facebookToken);
+    return this.facebookAuthService.checkUserByFacebook(facebookToken);
   }
 }

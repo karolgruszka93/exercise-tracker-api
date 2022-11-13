@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { ExerciseGroups } from './exerciseGroups.entity';
 import { ExerciseGroupsModule } from './exerciseGroups.module';
 
-describe('ExerciseGroups controller', () => {
+describe('ExerciseGroups', () => {
   let app: INestApplication;
   let exerciseGroupsRepository: Repository<ExerciseGroups>;
 

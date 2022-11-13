@@ -12,28 +12,26 @@ export class FacebookAuthService {
     private readonly httpService: HttpService,
   ) {}
 
-  async checkUserByFacebookToken(facebookToken: string): Promise<User> {
-    const user = await this.usersService.findUserByFacebookToken(facebookToken);
-    if (user) {
-      return user;
-    } else {
-      return this.createUserByFacebookToken(facebookToken);
-    }
-  }
-
-  async createUserByFacebookToken(facebookToken: string): Promise<User> {
+  async checkUserByFacebook(facebookToken: string): Promise<User> {
     try {
       const fetchedFacebookUser = await lastValueFrom(
         this.httpService.get(facebookAPI + facebookToken),
       );
 
-      return await this.usersService.createUser({
-        firstName: fetchedFacebookUser?.data?.first_name,
-        lastName: fetchedFacebookUser?.data?.last_name,
-        picture: fetchedFacebookUser?.data?.picture?.data?.url,
-        facebookToken,
-        googleToken: null,
-      });
+      const user = await this.usersService.findUserByProfileId(
+        fetchedFacebookUser?.data?.id,
+      );
+
+      if (user) {
+        return user;
+      } else {
+        return await this.usersService.createUser({
+          firstName: fetchedFacebookUser?.data?.first_name,
+          lastName: fetchedFacebookUser?.data?.last_name,
+          picture: fetchedFacebookUser?.data?.picture?.data?.url,
+          profileId: fetchedFacebookUser?.data?.id,
+        });
+      }
     } catch (error) {
       if (error.name === 'AxiosError') {
         throw new HttpException(
