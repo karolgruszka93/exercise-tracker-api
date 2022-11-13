@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { Users } from './users.entity';
 import { UsersModule } from './users.module';
 
-describe('Users controller', () => {
+describe('Users', () => {
   let app: INestApplication;
   let usersRepository: Repository<Users>;
 

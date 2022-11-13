@@ -6,10 +6,13 @@ import { Repository } from 'typeorm';
 import { Users } from '../../users/users.entity';
 import { FacebookAuthModule } from './facebookAuth.module';
 import { UsersModule } from '../../users/users.module';
+import { HttpService } from '@nestjs/axios';
+import { of } from 'rxjs';
 
-describe('FacebookAuth controller', () => {
+describe('FacebookAuth', () => {
   let app: INestApplication;
   let usersRepository: Repository<Users>;
+  let moduleFixture: TestingModule;
 
   const testingDatabaseConnection = TypeOrmModule.forRoot({
     type: 'sqlite',
@@ -20,20 +23,40 @@ describe('FacebookAuth controller', () => {
     logging: false,
   });
 
-  beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [FacebookAuthModule, UsersModule, testingDatabaseConnection],
-    }).compile();
+  const mockedFbResponse = {
+    data: {
+      id: 'mockedProfileId',
+      first_name: 'mockedFirstName',
+      last_name: 'mockedLastName',
+      picture: {
+        data: {
+          url: 'mockedPictureUrl',
+        },
+      },
+    },
+    status: 200,
+    statusText: 'OK',
+  };
 
+  beforeAll(async () => {
+    moduleFixture = await Test.createTestingModule({
+      imports: [FacebookAuthModule, UsersModule, testingDatabaseConnection],
+    })
+      .overrideProvider(HttpService)
+      .useValue({
+        get: jest.fn().mockReturnValue(of(mockedFbResponse)),
+      })
+      .compile();
     app = moduleFixture.createNestApplication();
-    await app.init();
 
     usersRepository = moduleFixture.get('UsersRepository');
+
+    await app.init();
   });
 
   beforeEach(async () => {
     await usersRepository.query(
-      'INSERT INTO users VALUES ("1", "mockedFirstName", "mockedLastName", "pictureUrl", "mockedFbToken", "mockedGoogleToken")',
+      'INSERT INTO users VALUES ("1", "mockedFirstName", "mockedLastName", "mockedPictureUrl", "mockedProfileId")',
     );
   });
 
@@ -45,7 +68,7 @@ describe('FacebookAuth controller', () => {
     await app.close();
   });
 
-  it('should return 200 status after find user with specific facebook token', async () => {
+  it('should return 200 status after find user with specific profile id', async () => {
     return request(app.getHttpServer())
       .post('/facebook-auth')
       .send({
@@ -54,7 +77,7 @@ describe('FacebookAuth controller', () => {
       .expect(200);
   });
 
-  it('should find and return user with specific facebook token', async () => {
+  it('should find and return user with specific profile id', async () => {
     return request(app.getHttpServer())
       .post('/facebook-auth')
       .send({
@@ -65,9 +88,25 @@ describe('FacebookAuth controller', () => {
           id: '1',
           firstName: 'mockedFirstName',
           lastName: 'mockedLastName',
-          picture: 'pictureUrl',
-          facebookToken: 'mockedFbToken',
-          googleToken: 'mockedGoogleToken',
+          picture: 'mockedPictureUrl',
+          profileId: 'mockedProfileId',
+        });
+      });
+  });
+
+  it('should create and return user with specific profile id', async () => {
+    await usersRepository.query('DELETE FROM users');
+    return request(app.getHttpServer())
+      .post('/facebook-auth')
+      .send({
+        facebookToken: 'mockedFbToken',
+      })
+      .expect((response) => {
+        expect(response.body).toMatchObject({
+          firstName: 'mockedFirstName',
+          lastName: 'mockedLastName',
+          picture: 'mockedPictureUrl',
+          profileId: 'mockedProfileId',
         });
       });
   });
