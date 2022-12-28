@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { FacebookAuthService } from './facebookAuth.service';
-import { FacebookAuthController } from './facebookAuth.controller';
-import { UsersModule } from '../../users/users.module';
+import { FacebookAuthService } from 'auth/facebook/facebookAuth.service';
+import { FacebookAuthController } from 'auth/facebook/facebookAuth.controller';
+import { UsersModule } from 'users/users.module';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({

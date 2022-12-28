@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ExerciseGroups } from './exerciseGroups.entity';
-import { ExerciseGroupsModule } from './exerciseGroups.module';
+import { ExerciseGroups } from 'exerciseGroups/exerciseGroups.entity';
+import { ExerciseGroupsModule } from 'exerciseGroups/exerciseGroups.module';
 
 describe('ExerciseGroups', () => {
   let app: INestApplication;

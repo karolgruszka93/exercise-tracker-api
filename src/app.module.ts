@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExerciseGroups } from './exerciseGroups/exerciseGroups.entity';
-import { ExerciseGroupsModule } from './exerciseGroups/exerciseGroups.module';
-import { Users } from './users/users.entity';
-import { FacebookAuthModule } from './auth/facebook/facebookAuth.module';
+import { ExerciseGroups } from 'exerciseGroups/exerciseGroups.entity';
+import { ExerciseGroupsModule } from 'exerciseGroups/exerciseGroups.module';
+import { Users } from 'users/users.entity';
+import { FacebookAuthModule } from 'auth/facebook/facebookAuth.module';
 
 @Module({
   imports: [

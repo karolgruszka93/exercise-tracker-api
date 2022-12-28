@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { FacebookAuthService } from './facebookAuth.service';
-import { User } from '../../users/interfaces/users.interface';
-import { FacebookAuthDto } from './dto/facebookAuth.dto';
+import { FacebookAuthService } from 'auth/facebook/facebookAuth.service';
+import { User } from 'users/interfaces/users.interface';
+import { FacebookAuthDto } from 'auth/facebook/dto/facebookAuth.dto';
 
 @Controller('facebook-auth')
 export class FacebookAuthController {

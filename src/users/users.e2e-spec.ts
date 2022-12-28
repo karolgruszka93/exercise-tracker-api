@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Users } from './users.entity';
-import { UsersModule } from './users.module';
+import { Users } from 'users/users.entity';
+import { UsersModule } from 'users/users.module';
 
 describe('Users', () => {
   let app: INestApplication;

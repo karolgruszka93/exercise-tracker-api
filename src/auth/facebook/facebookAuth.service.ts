@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsersService } from '../../users/users.service';
-import { User } from '../../users/interfaces/users.interface';
+import { UsersService } from 'users/users.service';
+import { User } from 'users/interfaces/users.interface';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { facebookAPI } from '../../helpers/services';
+import { facebookAPI } from 'helpers/services';
 
 @Injectable()
 export class FacebookAuthService {

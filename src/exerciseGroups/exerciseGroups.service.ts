@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ExerciseGroup } from './interfaces/exerciseGroup.interface';
-import { ExerciseGroups } from './exerciseGroups.entity';
+import { ExerciseGroup } from 'exerciseGroups/interfaces/exerciseGroup.interface';
+import { ExerciseGroups } from 'exerciseGroups/exerciseGroups.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

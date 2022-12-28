@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateExerciseGroupDto } from './dto/createExerciseGroupDto';
-import { ExerciseGroupsService } from './exerciseGroups.service';
-import { ExerciseGroup } from './interfaces/exerciseGroup.interface';
-import { GetExerciseGroupDto } from './dto/getExerciseGroupDto';
+import { CreateExerciseGroupDto } from 'exerciseGroups/dto/createExerciseGroupDto';
+import { ExerciseGroupsService } from 'exerciseGroups/exerciseGroups.service';
+import { ExerciseGroup } from 'exerciseGroups/interfaces/exerciseGroup.interface';
+import { GetExerciseGroupDto } from 'exerciseGroups/dto/getExerciseGroupDto';
 
 @Controller('exercise-groups')
 export class ExerciseGroupsController {
