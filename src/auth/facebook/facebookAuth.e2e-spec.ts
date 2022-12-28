@@ -3,9 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Users } from '../../users/users.entity';
-import { FacebookAuthModule } from './facebookAuth.module';
-import { UsersModule } from '../../users/users.module';
+import { Users } from 'users/users.entity';
+import { FacebookAuthModule } from 'auth/facebook/facebookAuth.module';
+import { UsersModule } from 'users/users.module';
 import { HttpService } from '@nestjs/axios';
 import { of } from 'rxjs';
 
